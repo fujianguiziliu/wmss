@@ -28,38 +28,45 @@ $(function(){
 	if($("#editForm").size()>0){
 		$("#editForm").validate({
 			rules:{
-				"employee.name":{
+				"e.name":{
 					required:true,
 					minlength: 4
 				},
-				"employee.password":{
+				"e.password":{
 					required:true,
 					minlength: 4
 				},
-				repassword:{
+				"repassword":{
 					equalTo: "#password"
 				},
-				"employee.email":"email",
-				"employee.age":{
+				"e.email":{
+					email:true
+				},
+				
+				"e.age":{
 					digits: true,
 					range: [18, 60]
 				}
 			},
 			messages:{
-				"employee.name":{
+				"e.name":{
 					required:"用户名不能为空!",
 					minlength:"用户名长度至少4位"
 				},
-				"employee.password":{
+				"e.password":{
 					required:"密码不能为空!",
 					minlength:"密码长度至少4位"
 				},
-				repassword:"两次输入的密码不一致",
-				"employee.email":"请输入正确格式的EMAIL",
-				"employee.age":{
-					digits:"请输入合法的年龄",
-					range:"年龄范围在18到60岁"
-				}
+				'repassword':{
+ 					equalTo:"重复验证密码和密码相同"
+ 				},
+ 				'e.email':{
+ 					email:"请输入合法的email"
+ 				},
+ 				'e.age':{
+ 					range:"年龄必须在18到68之间",
+ 					digits:"年龄必须是整数"
+ 				}
 			}
 		});
 	}

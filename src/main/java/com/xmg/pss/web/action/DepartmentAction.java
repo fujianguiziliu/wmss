@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.xmg.pss.domain.Department;
+import com.xmg.pss.page.PageResult;
+import com.xmg.pss.query.DepartmentQueryObject;
 import com.xmg.pss.service.IDepartmentService;
 import com.xmg.pss.util.RequiredPermission;
 
@@ -17,12 +19,15 @@ public class DepartmentAction extends BaseAction {
 	private Department dept = new Department();
 	@Setter
 	private IDepartmentService deptService;
+	
+	@Getter
+	private DepartmentQueryObject qo=new DepartmentQueryObject();
 
 	@RequiredPermission("部门列表")
 	public String execute() throws Exception {
-		List<Department> list = deptService.list();
+	 PageResult result =deptService.pageQuery(qo);
 		//将数据添加到值栈中
-		ActionContext.getContext().put("list", list);
+		ActionContext.getContext().put("result", result);
 		return LIST;
 	}
 
@@ -30,8 +35,9 @@ public class DepartmentAction extends BaseAction {
 	public String delete() throws Exception {
 		if (dept.getId() != null) {
 			deptService.delete(dept.getId());
+			putMsg("删除成功");
 		}
-		return SUCCESS;
+		return NONE;
 	}
 
 	@RequiredPermission("部门编辑")
@@ -46,8 +52,10 @@ public class DepartmentAction extends BaseAction {
 	public String saveOrUpdate() throws Exception {
 		if (dept.getId() != null) {
 			deptService.update(dept);
+			addActionMessage("修改成功");
 		} else {
 			deptService.save(dept);
+			addActionMessage("新增成功");
 		}
 		return SUCCESS;
 	}

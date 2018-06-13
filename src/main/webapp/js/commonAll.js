@@ -41,6 +41,38 @@ $(function(){
 	$(".btn_batchDelete").click(function(){
 		//获取到需要批量删除的url
 		var url=$(this).data("url");
+		if($(".acb:checked").size()==0){
+			/*alert("亲，请选择需要删除的数据");*/
+			$.dialog({
+				title:"",
+				content:"亲，请选择需要删除的数据",
+				ok:true
+			})
+			return;
+		}
+
+		$.dialog({
+			title:"温馨提示",
+			content:"亲，确定要批量删除数据嘛？",
+			ok:function(){
+				var ids=$.map($(".acb:checked"),function(item,index,arr){
+					return $(item).data("oid");
+				});
+				//使用jquery的post提交
+				$.post(url,{"ids":ids},function(data){
+					//alert("批量删除成功");
+					$.dialog({
+						title:"温馨提示",
+						content:data,
+						ok:function(){
+							window.location.reload();
+						}	
+					})
+					
+				})
+			},
+			cancel:true
+		})
 		//获取到复选框
 		/*console.log($(".acb:checked"));
 		var checkboxArr=$(".acb:checked").get();
@@ -49,19 +81,38 @@ $(function(){
 			console.log($(checkboxArr[index]).data("oid"));
 			ids.push($(checkboxArr[index]).data("oid"))
 		}*/
-		var ids=$.map($(".acb:checked"),function(item,index,arr){
-			return $(item).data("oid");
-		});
+		
+		
+		
 		//console.log(ids);
-		//使用jquery的post提交
-		$.post(url,{"ids":ids},function(){
-			alert("批量删除成功");
-			window.location.reload();
-		})
+		
 	});
 })
 
+$(function(){
+//删除操作
 
+		$(".btn_delete").click(function(){
+			var url=$(this).data("url");
+			$.dialog({
+				title:"温馨提示",
+				content:"亲，确定要删除吗？",
+				ok:function(){
+					console.log(url);
+					$.get(url,function(data){
+						$.dialog({
+							title:"温馨提示",
+							content:data,
+							ok:function(){
+								window.location.reload();
+							}
+						})
+					})
+				},
+				cancel:true
+			})
+		});
+})
 
 
 

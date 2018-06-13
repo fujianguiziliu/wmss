@@ -1,4 +1,4 @@
-$(document).ready(function() {
+(document).ready(function() {
 	$("#login_sub").click(function() {
 		$("#submitForm").submit();
 	});

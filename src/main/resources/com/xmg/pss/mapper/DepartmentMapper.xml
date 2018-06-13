@@ -39,4 +39,18 @@
 	<select id="list" resultMap="base_mapping">
 		select * from department
 	</select>
+	
+	<sql id="conditionSql">
+		
+	</sql>
+	<select id="getTotalCount" resultType="long">
+		select count(*) from department
+		<include refid="conditionSql"/>
+	</select>
+	
+	<select id="pageQuery" resultMap="base_mapping">
+		select * from department
+		<include refid="conditionSql"/>
+		limit #{beginIndex},#{pageSize}
+	</select>
 </mapper>

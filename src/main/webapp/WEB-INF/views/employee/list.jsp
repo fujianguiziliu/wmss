@@ -8,15 +8,17 @@
 <link href="style/basic_layout.css" rel="stylesheet" type="text/css">
 <link href="style/common_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="js/artDialog/jquery.artDialog.js?skin=chrome"></script>
 <script type="text/javascript" src="/js/commonAll.js"></script>
+
 <title>PSS-账户管理</title>
 <style>
 .alt td {
 	background: black !important;
 }
 </style>
-<script type="text/javascript">
-	/* $(function() {
+<%-- <script type="text/javascript">
+	 $(function() {
 		$(".btn_input").click(function() {
 			window.location.href = $(this).data("url");
 		});
@@ -36,10 +38,12 @@
 		$(":input[name='qo.pageSize']").change(function() {
 			$("#searchForm").submit();
 		});
-	}); */
-</script>
+	}); 
+</script> --%>
 </head>
+
 <body>
+<%@include file="/WEB-INF/views/common/common_message.jsp" %>
 	<s:form id="searchForm" namaspace="/" action="employee" method="post">
 		<div id="container">
 			<div class="ui_content">
@@ -109,8 +113,14 @@
 										<s:a namespace="/" action="employee_input">
 											<s:param name="e.id" value="#e.id" />编辑</s:a> |
 																			
-										<s:a namespace="/" action="employee_delete">
-											<s:param name="e.id" value="#e.id" />删除</s:a>
+										<%-- <s:a namespace="/" action="employee_delete">
+											<s:param name="e.id" value="#e.id" />删除</s:a> --%>
+											<s:url namespace="/" action="employee_delete" var="deleteUrl">
+												<s:param name="e.id" value="id"/>
+											</s:url>
+										<a href="javascript:;" class="btn_delete" data-url="<s:property value="#deleteUrl"/>">
+											删除
+										</a>	
 									</td>
 								</tr>
 							</s:iterator>

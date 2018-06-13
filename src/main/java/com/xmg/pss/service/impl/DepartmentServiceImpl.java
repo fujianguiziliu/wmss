@@ -1,5 +1,6 @@
 package com.xmg.pss.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import lombok.Setter;
@@ -7,6 +8,8 @@ import lombok.Setter;
 import com.xmg.pss.domain.Department;
 import com.xmg.pss.mapper.DepartmentMapper;
 import com.xmg.pss.mapper.EmployeeMapper;
+import com.xmg.pss.page.PageResult;
+import com.xmg.pss.query.QueryObject;
 import com.xmg.pss.service.IDepartmentService;
 
 public class DepartmentServiceImpl implements IDepartmentService {
@@ -43,6 +46,16 @@ public class DepartmentServiceImpl implements IDepartmentService {
 	@Override
 	public List<Department> list() {
 		return deptMapper.list();
+	}
+
+	@Override
+	public PageResult pageQuery(QueryObject qo) {
+		Long count=deptMapper.getTotalCount(qo);
+		if (count ==0) {
+			return new PageResult(Collections.EMPTY_LIST, 0, 1, qo.getPageSize());
+		}
+		List<Department> listData=deptMapper.pageQuery(qo);
+		return new PageResult(listData, count.intValue(), qo.getCurrentPage(), qo.getPageSize());
 	}
 
 }

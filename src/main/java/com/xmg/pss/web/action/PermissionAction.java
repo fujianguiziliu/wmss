@@ -32,8 +32,9 @@ public class PermissionAction extends BaseAction {
 	public String delete() throws Exception {
 		if (permission.getId() != null) {
 			permissionService.delete(permission.getId());
+			putMsg("删除成功");
 		}
-		return SUCCESS;
+		return NONE;
 	}
 
 	public String reload() {

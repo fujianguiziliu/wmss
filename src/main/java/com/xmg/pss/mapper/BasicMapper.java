@@ -5,12 +5,12 @@ import java.util.List;
 import com.xmg.pss.query.QueryObject;
 
 public interface BasicMapper<T> {
-	void save(T e);
+	void save(T t);
 
 	void delete(Long id);
 
 	void batchDelete(List<Long> ids);
-	void update(T e);
+	void update(T t);
 
 	T get(Long id);
 

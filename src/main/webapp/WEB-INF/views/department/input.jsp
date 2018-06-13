@@ -10,8 +10,10 @@
 <link href="/style/common_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/js/jquery/jquery.js"></script>
 <script type="text/javascript" src="/js/commonAll.js"></script>
-</head>
+ 
+ </head>
 <body>
+<%@include file="/WEB-INF/views/common/common_message.jsp" %>
 	<s:form name="editForm" namespace="/" action="department_saveOrUpdate"
 		id="editForm">
 		<s:hidden name="dept.id" />
@@ -44,9 +46,11 @@
 						<td>&nbsp;</td>
 						<td class="ui_text_lt">
 							&nbsp;
-							<s:submit value="提交" class="ui_input_btn01"></s:submit>
+							<input type="submit" value="提交" class="ui_input_btn01">
+							<%-- <s:submit value="提交" class="ui_input_btn01"></s:submit> --%>
 							&nbsp;
-							<s:reset value="重置" class="ui_input_btn01"></s:reset>
+							<input id="cancelbutton"  type="button" value="重置" class="ui_input_btn01">
+							<%-- <s:reset value="重置" class="ui_input_btn01"></s:reset> --%>
 						</td>
 					</tr>
 				</table>

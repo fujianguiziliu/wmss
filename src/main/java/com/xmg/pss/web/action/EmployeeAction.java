@@ -3,12 +3,15 @@ package com.xmg.pss.web.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
 import javassist.expr.NewArray;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 import com.xmg.pss.domain.Department;
 import com.xmg.pss.domain.Employee;
 import com.xmg.pss.domain.Role;
@@ -33,35 +36,55 @@ public class EmployeeAction extends BaseAction {
 	
 	@Setter@Getter
 	private List<Long> ids=new ArrayList<>();
-	/*@Setter
-	private String repassword;*/
+	@Setter
+	private String repassword;
 	@Getter 
 	private EmployeeQueryObject qo = new EmployeeQueryObject();
 
 	@RequiredPermission("员工列表")
+	@InputConfig(methodName = "input")
 	public String execute() throws Exception {
-		PageResult result = empService.pageQuery(qo);
-		//将数据添加到值栈中
-		ActionContext.getContext().put("result", result);
+		try {
+			PageResult result = empService.pageQuery(qo);
+			//将数据添加到值栈中
+			ActionContext.getContext().put("result", result);
 
-		//将页面上需要的部门信息全部查询出来
-		List<Department> depts = deptService.list();
-		ActionContext.getContext().put("depts", depts);
+			//将页面上需要的部门信息全部查询出来
+			List<Department> depts = deptService.list();
+			ActionContext.getContext().put("depts", depts);
+			int i=1/0;
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			addActionError("操作失败1，请联系管理员");
+		}
 		return LIST;
 	}
 
 	@RequiredPermission("员工删除")
 	public String delete() throws Exception {
-		if (e.getId() != null) {
-			empService.delete(e.getId());
+		try {
+			if (e.getId() != null) {
+				empService.delete(e.getId());
+				putMsg("删除成功");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			putMsg("删除失败，请联系管理员");
 		}
-		return SUCCESS;
+		return NONE;
 	}
 	
 	@RequiredPermission("员工批量删除")
 	public String batchDelete() throws Exception {
-		if (ids.size()>0) {
-			empService.batchDelete(ids);
+		try {
+			if (ids.size()>0) {
+				empService.batchDelete(ids);
+				putMsg("删除成功");
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			putMsg("批量删除失败，请联系管理员");
 		}
 		return NONE;
 	}
@@ -80,11 +103,20 @@ public class EmployeeAction extends BaseAction {
 	}
 
 	@RequiredPermission("员工保存或更新")
+	//@InputConfig(methodName = "input")
 	public String saveOrUpdate() throws Exception {
-		if (e.getId() != null) {
-			empService.update(e);
-		} else {
-			empService.save(e);
+		try {
+			int i=1/0;
+			if (e.getId() != null) {
+				empService.update(e);
+				addActionMessage("修改成功");
+			} else {
+				empService.save(e);
+				addActionMessage("新增成功");
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			addActionError("操作失败2，请联系管理员");
 		}
 		return SUCCESS;
 	}

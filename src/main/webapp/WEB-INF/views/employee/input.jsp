@@ -9,11 +9,69 @@
 <link href="/style/basic_layout.css" rel="stylesheet" type="text/css">
 <link href="/style/common_style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="js/artDialog/jquery.artDialog.js?skin=chrome"></script>
 <script type="text/javascript" src="/js/jquery/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery/messages_cn.js"></script>
 <script type="text/javascript" src="/js/commonAll.js"></script>
 <script type="text/javascript" src="/js/system/employee.js"></script>
-</head>
+
+ <%-- <script>
+ 	$(function(){
+ 		$("#editForm").validate({
+ 			rules:{
+ 				'e.name':{
+ 					required:true,
+ 					minlength:4
+ 				},
+ 				'e.password':{
+ 					required:true,
+ 					minlength:4
+ 				},
+ 				'repassword':{
+ 					equalTo:"#password"
+ 				},
+ 				'e.email':{
+ 					email:true
+ 				},
+ 				'e.age':{
+ 					range:[18,68],
+ 					digits:true
+ 				}
+ 				
+ 			},
+ 			 messages:{
+ 				'e.name':{
+ 					required:"用户名不能为空",
+ 					minlength:"最小长度4位"
+ 				},
+ 				'e.password':{
+ 					required:"密码不能为空",
+ 					minlength:"最小长度4位"
+ 				},
+ 				'repassword':{
+ 					equalTo:"重复验证密码和密码相同"
+ 				},
+ 				'e.email':{
+ 					email:"请输入合法的email"
+ 				},
+ 				'e.age':{
+ 					range:"年龄必须在18到68之间",
+ 					digits:"年龄必须是整数"
+ 				}
+ 				
+ 			} 
+ 			
+ 		})	
+ 	})
+ </script>
+  --%>
+ 
+ 
+ 
+ </head>
+
 <body>
+<%@include file="/WEB-INF/views/common/common_message.jsp" %>
 	<s:form name="editForm" namespace="/" action="employee_saveOrUpdate"
 		id="editForm">
 		<s:hidden name="e.id" />
