@@ -15,6 +15,7 @@ import com.xmg.pss.mapper.EmployeeMapper;
 import com.xmg.pss.page.PageResult;
 import com.xmg.pss.query.QueryObject;
 import com.xmg.pss.service.IEmployeeService;
+import com.xmg.pss.util.MD5;
 
 public class EmployeeServiceImpl implements IEmployeeService {
 
@@ -23,6 +24,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public void save(Employee e) {
+		e.setPassword(MD5.encode(e.getPassword()));
 		empMapper.save(e);
 		List<Role> roles = e.getRoles();
 		for (Role role : roles) {
@@ -74,7 +76,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public Employee checkLogin(String username, String password) {
-		Employee e = empMapper.checkLogin(username, password);
+		Employee e = empMapper.checkLogin(username, MD5.encode(password));
 		if (e == null) {
 			throw new RuntimeException("用户名或者密码错误!");
 		}

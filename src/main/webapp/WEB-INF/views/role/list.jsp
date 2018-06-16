@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/js/commonAll.js"></script>
 <script type="text/javascript"
 	src="/js/artDialog/artDialog.js?skin=blue"></script>
-<script type="text/javascript" src="/js/common_page.js"></script>
+<%-- <script type="text/javascript" src="/js/common_page.js"></script> --%>
 <title>PSS-角色管理</title>
 <style>
 .alt td {
@@ -20,16 +20,18 @@
 </style>
 </head>
 <body>
-	<s:form id="searchForm" action="role" method="post">
+<%@include file="/WEB-INF/views/common/common_message.jsp" %>
+	<s:form id="searchForm" namespace="/" action="role" method="post">
 		<div id="container">
 			<div class="ui_content">
 				<div class="ui_text_indent">
 					<div id="box_border">
 						<div id="box_top">搜索</div>
 						<div id="box_bottom">
-							<input type="button" value="查询" class="ui_input_btn01 page_btn" />
 							<input type="button" value="新增" class="ui_input_btn01 btn_input"
-								data-href='<s:url action="role_input" />' />
+								data-url="<s:url namespace="/" action="role_input"/>"/>
+							<input type="button" value="批量删除" class="ui_input_btn01 btn_batchDelete" 
+								data-url="<s:url namespace="/" action="role_batchDelete"/>"/>
 						</div>
 					</div>
 				</div>
@@ -39,16 +41,21 @@
 					<table class="table" cellspacing="0" cellpadding="0" width="100%"
 						align="center" border="0">
 						<tr>
-							<th width="30"></th>
+							<th width="30">
+							<input type="checkbox" id="all" />
+							</th>
 							<th>编号</th>
 							<th>角色名称</th>
 							<th>角色代码</th>
-							<th></th>
+							<th>操作</th>
 						</tr>
 						<tbody>
 							<s:iterator value="#result.listData">
 								<tr>
-									<td></td>
+									<td>
+									<input type="checkbox" name="IDCheck" class="acb" 
+									data-oid="<s:property value="id"/>"/>
+									</td>
 									<td>
 										<s:property value="id" />
 									</td>
@@ -59,10 +66,15 @@
 										<s:property value="sn" />
 									</td>
 									<td>
-										<s:a action="role_input">
+										<s:a namespace="/" action="role_input">
 											<s:param name="r.id" value="id" />编辑</s:a>
-										<s:a action="role_delete">
-											<s:param name="r.id" value="id" />删除</s:a>
+										<s:url namespace="/" action="role_delete"
+										 var="deleteUrl">
+										 <s:param name="r.id" value="id" />
+										 </s:url>
+										<a href="javascript:;" class="btn_delete" data-url="<s:property value="#deleteUrl"/>">
+											删除
+										</a>
 									</td>
 								</tr>
 							</s:iterator>

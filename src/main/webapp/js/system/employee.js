@@ -102,3 +102,48 @@ $(function(){
 		}).remove();
 	}
 });
+
+$(function(){
+	$("#select").click(function(){
+		$(".all_role option:selected").appendTo($(".selected_role"));
+	});
+	
+	$("#selectAll").click(function(){
+		$(".all_role option").appendTo($(".selected_role"));
+	});
+	
+	$("#deselect").click(function(){
+		$(".selected_role option:selected").appendTo($(".all_role"));
+	});
+	
+	$("#deselectAll").click(function(){
+		$(".selected_role option").appendTo($(".all_role"));
+	});
+	
+	$("#editForm").submit(function(){
+		$(".selected_role option").prop("selected",true);
+		/*if($(".selected_roles option:selected").size()!=$(".selected_roles option")){
+			$(".selected_roles option").prop("selected",true);
+		}*/
+	});
+	
+	$(function(){
+		//第一种
+		console.log($(".selected_role option"));
+		var selectedIds=$.map($(".selected_role option"),function(item,index,arr){
+			return $(item).val();
+		});
+		console.log(selectedIds);
+		$.each($(".all_role option"),function(index,item){
+			//console.log(arguments);
+			//ids.push($(item).val());
+			console.log(index,item);
+			var id=$(item).val();
+			if($.inArray(id,selectedIds)>=0){
+				$(item).remove();
+			}
+		});
+		
+	})
+		
+});

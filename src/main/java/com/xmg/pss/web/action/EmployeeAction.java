@@ -52,7 +52,7 @@ public class EmployeeAction extends BaseAction {
 			//将页面上需要的部门信息全部查询出来
 			List<Department> depts = deptService.list();
 			ActionContext.getContext().put("depts", depts);
-			int i=1/0;
+			//int i=1/0;
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -106,7 +106,7 @@ public class EmployeeAction extends BaseAction {
 	//@InputConfig(methodName = "input")
 	public String saveOrUpdate() throws Exception {
 		try {
-			int i=1/0;
+			//int i=1/0;
 			if (e.getId() != null) {
 				empService.update(e);
 				addActionMessage("修改成功");

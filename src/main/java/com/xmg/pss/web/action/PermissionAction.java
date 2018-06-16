@@ -37,8 +37,15 @@ public class PermissionAction extends BaseAction {
 		return NONE;
 	}
 
-	public String reload() {
-		permissionService.reload();
+	public String reload() throws Exception{
+		try {
+			permissionService.reload();
+			putMsg("加载成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			putMsg("加载失败，请联系管理员");
+		}
 		return NONE;
 	}
 

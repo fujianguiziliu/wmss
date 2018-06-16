@@ -1,4 +1,15 @@
-/* zTree插件加载目录的处理  */
+$(function(){
+	//console.log($("#dleft_tab1 a"));
+	$("#dleft_tab1 a").click(function(){
+		//1.获取到自定义的action
+		var action = $(this).data("action");
+		//2.根据id获取到iframe组件
+		$("#rightMain").prop("src",action);
+	});
+})
+
+
+/* zTree插件加载目录的处理  
 var zTree;
 
 var setting = {
@@ -74,10 +85,10 @@ function loadDate() {
 			+ myDay;
 }
 
-/**
+*//**
  * 隐藏或者显示侧边栏
  * 
- */
+ *//*
 function switchSysBar(flag) {
 	var side = $('#side');
 	var left_menu_cnt = $('#left_menu_cnt');
@@ -163,4 +174,4 @@ $(function() {
 	$("#show_hide_btn").click(function() {
 		switchSysBar();
 	});
-});
+});*/

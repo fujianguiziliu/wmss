@@ -16,7 +16,7 @@
 	background: black !important;
 }
 </style>
-<%-- <script type="text/javascript">
+ <%-- <script type="text/javascript">
 	$(function() {
 		$(".btn_input").click(function() {
 			window.location.href = $(this).data("url");
@@ -34,7 +34,7 @@
 						<div id="box_top">搜索</div>
 						<div id="box_bottom">
 							<input type="button" value="新增" class="ui_input_btn01 btn_input"
-								data-url='<s:url namespace="/" action="department_input"/>" />
+								data-url="<s:url namespace="/" action="department_input"/>" />
 						</div>
 					</div>
 				</div>

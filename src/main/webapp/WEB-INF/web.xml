@@ -23,8 +23,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>Struts2</filter-name>
-		 <url-pattern>/*</url-pattern>
-	
+		<url-pattern>/*</url-pattern>
+		 <url-pattern>*.action</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 
 	 <servlet>
@@ -35,7 +36,7 @@
       	<servlet-name>DruidStatView</servlet-name>
       	<url-pattern>/druid/*</url-pattern>
   	</servlet-mapping>
-  	<!-- //配置监控页面访问密码
+  	 //配置监控页面访问密码
   	配置 Druid 监控信息显示页面  
 	<servlet>  
     <servlet-name>DruidStatView</servlet-name>  
@@ -56,8 +57,8 @@
 	<param-value>123</param-value>  
     </init-param>  
 </servlet>  
-<servlet-mapping>  
+<!-- <servlet-mapping>  
     <servlet-name>DruidStatView</servlet-name>  
     <url-pattern>/druid/*</url-pattern>  
-</servlet-mapping>   -->
+</servlet-mapping>  -->  
 </web-app>
